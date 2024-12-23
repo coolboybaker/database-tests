@@ -1,0 +1,169 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+
+    <div class="text-center">
+
+        <div>
+            <input type="text" id="block-encrypt-input" />
+            <button id="block-encrypt-button">Block encrypt</button>
+            <button id="block-decrypt-button">Block decrypt</button>
+            <input type="text" id="block-decrypt-input" />
+        </div>
+
+        <div>
+            <input type="text" id="misha-encrypt-input" />
+            <button id="misha-encrypt-button">Misha encrypt</button>
+            <button id="misha-decrypt-button">Misha decrypt</button>
+            <input type="text" id="misha-decrypt-input" />
+        </div>
+
+        <div>
+            <input type="text" id="evgeny-encrypt-input" />
+            <button id="evgeny-encrypt-button">Evgeny encrypt</button>
+            <button id="evgeny-decrypt-button">Evgeny decrypt</button>
+            <input type="text" id="evgeny-decrypt-input" />
+        </div>
+
+    </div>
+
+    <script>
+
+        async function blockEncrypt() {
+            let text = document.getElementById('block-encrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/BlockEncrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function(result) {
+                    document.getElementById('block-decrypt-input').value = result.responseText
+                }
+            })
+        }
+
+        async function blockDecrypt() {
+            let text = document.getElementById('block-decrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/BlockDecrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function (result) {
+                    document.getElementById('block-encrypt-input').value = result.responseText
+                }
+            })
+        }
+
+        async function mishaEncrypt() {
+            let text = document.getElementById('misha-encrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/MishaEncrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function (result) {
+                    document.getElementById('misha-decrypt-input').value = result.responseText
+                }
+            })
+        }
+
+        async function mishaDecrypt() {
+            let text = document.getElementById('misha-decrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/MishaDecrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function (result) {
+                    document.getElementById('misha-encrypt-input').value = result.responseText
+                }
+            })
+        }
+
+        async function evgenyEncrypt() {
+            let text = document.getElementById('evgeny-encrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/DHEncrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function (result) {
+                    document.getElementById('evgeny-decrypt-input').value = result.responseText
+                }
+            })
+        }
+
+        async function evgenyDecrypt() {
+            let text = document.getElementById('evgeny-decrypt-input').value
+
+            await $.ajax({
+                url: 'api/request/DHDecrypt',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    text: text,
+                }),
+                complete: function (result) {
+                    document.getElementById('evgeny-encrypt-input').value = result.responseText
+                }
+            })
+        }
+
+
+        document.getElementById('block-encrypt-button').addEventListener('click', (e) => {
+            blockEncrypt()
+        })
+
+        document.getElementById('block-decrypt-button').addEventListener('click', (e) => {
+            blockDecrypt()
+        })
+
+        document.getElementById('misha-encrypt-button').addEventListener('click', (e) => {
+            mishaEncrypt()
+        })
+
+        document.getElementById('misha-decrypt-button').addEventListener('click', (e) => {
+            mishaDecrypt()
+        })
+
+        document.getElementById('evgeny-encrypt-button').addEventListener('click', (e) => {
+            evgenyEncrypt()
+        })
+
+        document.getElementById('evgeny-decrypt-button').addEventListener('click', (e) => {
+            evgenyDecrypt()
+        })
+
+    </script>
+
+</body>
